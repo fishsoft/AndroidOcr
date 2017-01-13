@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_PICK_IMAGE = 0x1000;
     private static final int REQUEST_CODE_CAPTURE_CAMEIA = 0x1001;
     private String path = null;
+    private String code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,13 +90,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String code = parseImageToString(path);
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-                    Log.d(TAG, code + "");
-//                        }
-//                    });
+                    code = parseImageToString(path);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this, code + "", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
